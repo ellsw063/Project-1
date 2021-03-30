@@ -55,7 +55,7 @@ The machines on the internal network are not exposed to the public Internet.
 _
 Only the _Elk server__ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - _TODO: Add whitelisted IP addresses_
- Azure Public IP address with 5601
+ Azure Public IP address with TCP 5601
 
 Machines within the network can only be accessed by Jump-box Provisioner____.
 - _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
@@ -67,7 +67,7 @@ A summary of the access policies in place can be found in the table below.
 
 | Name       | Publicly Accessible |  Allowed IP Addresses          |
 |------------|---------------------|--------------------------------|
-| Jump Box   | Yes                 | 10.0.0.1 10.0.0.2              |
+| Jump Box   | Yes                 | Workstation Public IP SSH 22   |
 | Elk Server | No                  | Azure Public IP using TCP 5601 |
 | Web-1      | No                  | 10.0.0.5                       |
 | Web-2      | No                  | 10.0.0.6                       |
@@ -78,19 +78,26 @@ A summary of the access policies in place can be found in the table below.
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
 - _TODO: What is the main advantage of automating configuration with Ansible?_
-Ansible allows for efficient deployment
+Ansible allows for efficient deployment of multi-step programs
 
 The playbook implements the following tasks:
 - _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
-
-
+- Step 1: Install Docker
+Step 2: Add Elastic Repository. Elastic repositories enable access to all the open-source software in the ELK stack.
+Step 3: Install Elasticsearch.
+Step 4: Install Kibana.
+Step 5: Install Logstash.
+Step 6: Install Filebeat.
 
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
 ![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+- Run `sudo docker container list -a` if you need to see your container's name.
+
+- Run `sudo docker ps` to view running containers.
+
+- Run `docker attach container_name` to get a shell on your Ansible container.
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -117,7 +124,10 @@ SSH into the control node and follow the steps below:
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
-   my-playbook1.yml
+   For ANSIBLE : See my-playbook1.yml
+   For FILEBEAT: See filebeat-playbook.yml
+   For METRICBEAT: See metricbeat-playbook.yml
+
 - _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
 - _Which URL do you navigate to in order to check that the ELK server is running?
 
